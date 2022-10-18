@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-public class ListaEmpresas {
+public class ListaEmpresas implements Acao {
 
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("Listando empresas");
 
@@ -21,7 +21,7 @@ public class ListaEmpresas {
 		List<Empresa> empresas = banco.getEmpresas();
 
 		request.setAttribute("empresas", empresas);
-		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas.jsp");
-		rd.forward(request, response);
+		
+		return "forward:listaEmpresas.jsp";
 	}
 }
