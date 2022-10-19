@@ -10,7 +10,8 @@
 <title>Nova Empresa</title>
 </head>
 <body>
-
+	<c:import url="logout-parcial.jsp" />
+	
 	<form action=${linkServletEntrada} method="post">
 		Nome: <input type="text" name="nome" /> 
 		Data Abertura: <input type="text" name="data" />

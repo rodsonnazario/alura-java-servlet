@@ -12,6 +12,13 @@
 <title>Empresas</title>
 </head>
 <body>
+	<c:import url="logout-parcial.jsp" />
+
+	Usuário Logado: ${usuarioLogado.login}
+	
+	<br />
+	<br />
+	
 	<c:if test="${not empty empresa}">
 		Empresa
 		${empresa}

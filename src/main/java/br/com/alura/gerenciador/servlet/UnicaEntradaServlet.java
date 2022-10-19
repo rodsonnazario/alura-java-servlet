@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.alura.gerenciador.acao.Acao;
 
@@ -20,6 +21,16 @@ public class UnicaEntradaServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String paramAcao = request.getParameter("acao");
+		
+		HttpSession sessao = request.getSession();
+		boolean usuarioNaoEstaLogado = sessao.getAttribute("usuarioLogado") == null;
+		boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
+		
+		if(ehUmaAcaoProtegida && usuarioNaoEstaLogado) {
+			response.sendRedirect("entrada?acao=LoginForm");;
+			return;
+		}
+		
 		String nomeDaClasse = "br.com.alura.gerenciador.acao." + paramAcao;
 		String nome;
 		try {
@@ -57,7 +68,7 @@ public class UnicaEntradaServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]);
 			rd.forward(request, response);
 		} else {
-			response.sendRedirect("WEB-INF/view/" + tipoEEndereco[1]);
+			response.sendRedirect(tipoEEndereco[1]);
 		}
 	}
 }

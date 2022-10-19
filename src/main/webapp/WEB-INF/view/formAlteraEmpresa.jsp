@@ -11,6 +11,7 @@
 <title>Altera Empresa</title>
 </head>
 <body>
+	<c:import url="logout-parcial.jsp" />
 
 	<form action=${linkEntradaServlet} method="post">
 		<fmt:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"
